@@ -158,23 +158,23 @@ static void
 adc_init (void)
 {
     ADMUX =
-        (0 << REFS1) |
-        (1 << REFS0) |
-        (0 << ADLAR) |
-        (0 << MUX3)  |
-        (0 << MUX2)  |
-        (1 << MUX1)  |
-        (1 << MUX0);
+    (0 << REFS1) |
+    (1 << REFS0) |
+    (0 << ADLAR) |
+    (0 << MUX3)  |
+    (0 << MUX2)  |
+    (1 << MUX1)  |
+    (1 << MUX0);
 
     ADCSRA =
-        (1 << ADEN)  |
-        (0 << ADSC)  |
-        (0 << ADFR)  |
-        (0 << ADIF)  |
-        (0 << ADIE)  |
-        (1 << ADPS2) |
-        (1 << ADPS1) |
-        (0 << ADPS0);
+    (1 << ADEN)  |
+    (0 << ADSC)  |
+    (0 << ADFR)  |
+    (0 << ADIF)  |
+    (0 << ADIE)  |
+    (1 << ADPS2) |
+    (1 << ADPS1) |
+    (0 << ADPS0);
 }
 
 static void registers_init(void)
