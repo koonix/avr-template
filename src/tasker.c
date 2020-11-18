@@ -26,31 +26,20 @@
 static uint8_t get_task_index(TaskFunctionPtr task);
 static const uint8_t numberof_tasks=sizeof(task_array)/sizeof(task_array[1]);
 
-/*
- * Finds a task's function and find it's
- * index in the tasks_array.
- */
-static uint8_t get_task_index(TaskFunctionPtr task)
-{
-    uint8_t task_index = 0;
-    for (; task_index < numberof_tasks; task_index++)
-        if (task_array[task_index].run == task)
-            break;
-    return task_index;
-}
-
 /* This function keeps track of the tasks' time and puts them into
 READY state. This function shall be called in a timer interrupt. */
 void task_time_manager(void)
 {
     for (uint8_t task_index = 0; task_index < numberof_tasks; task_index++) {
-        if (task_array[task_index].state == PAUSED)
+
+        if (task_array[task_index].state == PAUSED) {
             continue;
 
-        else if (task_array[task_index].period == 0)
-            task_array[task_index].state = READY;
+        } else if (task_array[task_index].period == 0) {
+            task_array[task_index].counter = 1;
+            task_array[task_index].state   = READY;
 
-        else if (task_array[task_index].counter >= task_array[task_index].period) {
+        } else if (task_array[task_index].counter >= task_array[task_index].period) {
             task_array[task_index].counter = 1;
             task_array[task_index].state   = READY;
         }
@@ -118,4 +107,17 @@ void task_set_period(TaskFunctionPtr task, TaskTime new_period)
 void task_set_counter(TaskFunctionPtr task, TaskTime new_counter)
 {
     task_array[get_task_index(task)].counter = new_counter;
+}
+
+/*
+ * Finds a task's function and find it's
+ * index in the tasks_array.
+ */
+static uint8_t get_task_index(TaskFunctionPtr task)
+{
+    uint8_t task_index = 0;
+    for (; task_index < numberof_tasks; task_index++)
+        if (task_array[task_index].run == task)
+            break;
+    return task_index;
 }
