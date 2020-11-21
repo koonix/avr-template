@@ -71,7 +71,7 @@ Task task_array[] = {
  * You should always set task's counter to 1.
  */
 
-/*    task function               state     period     counter  */
+/*    task function               state     period     counter (must be 1)  */
     { blink_upper,                PAUSED,   MSEC(4),   1 },
     { debounce,                 RUNNABLE,   MSEC(4),   1 },
     { motor_startup,              PAUSED,   MSEC(20),  1 },

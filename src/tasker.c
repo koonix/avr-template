@@ -24,7 +24,7 @@
 
 // Static function prototypes:
 static uint8_t get_task_index(TaskFunctionPtr task);
-static const uint8_t numberof_tasks=sizeof(task_array)/sizeof(task_array[1]);
+static const uint8_t numberof_tasks = sizeof(task_array) / sizeof(task_array[1]);
 
 /* This function keeps track of the tasks' time and puts them into
 READY state. This function shall be called in a timer interrupt. */

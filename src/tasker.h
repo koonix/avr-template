@@ -1,10 +1,8 @@
 
 /*
  * file:     tasker.h
- *
  * author:   Ferenc Nemeth,
  *           Refactored and improved by koonix (https://github.com/soystemd)
- *
  * date:     21 Jul 2018
  *
  * brief: This is a really simple, non-preemptive (co-operative) task scheduler.
