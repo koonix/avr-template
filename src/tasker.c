@@ -22,22 +22,18 @@
 #define TASKER_C
 #include "config.h"
 
-// Static function prototypes:
+/* Static function prototypes: */
 static uint8_t get_task_index(TaskFunctionPtr task);
 static const uint8_t numberof_tasks = sizeof(task_array) / sizeof(task_array[1]);
 
 /* This function keeps track of the tasks' time and puts them into
-READY state. This function shall be called in a timer interrupt. */
+   READY state. This function shall be called in a timer interrupt. */
 void task_time_manager(void)
 {
     for (uint8_t task_index = 0; task_index < numberof_tasks; task_index++) {
 
         if (task_array[task_index].state == PAUSED) {
             continue;
-
-        } else if (task_array[task_index].period == 0) {
-            task_array[task_index].counter = 1;
-            task_array[task_index].state   = READY;
 
         } else if (task_array[task_index].counter >= task_array[task_index].period) {
             task_array[task_index].counter = 1;
@@ -50,21 +46,15 @@ void task_time_manager(void)
 }
 
 /* This function calls the READY tasks and then puts them back into
-RUNNABLE state. This function SHALL be called in the infinite loop. */
+   RUNNABLE state. This function SHALL be called in the infinite loop. */
 void task_runner(void)
 {
     for (uint8_t task_index = 0; task_index < numberof_tasks; task_index++) {
         /* If it is ready, call it.*/
         if (task_array[task_index].state == READY) {
-            if (task_array[task_index].period == 0) {
-                cli();
-                task_array[task_index].state = PAUSED;
-                sei();
-            } else {
-                cli();
-                task_array[task_index].state = RUNNABLE;
-                sei();
-            }
+            cli();
+            task_array[task_index].state = RUNNABLE;
+            sei();
             task_array[task_index].run();
         }
     }
