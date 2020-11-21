@@ -1,0 +1,17 @@
+Task task_array[] = {
+
+/*
+ * Define tasks, their initial state and their run period.
+ * Period of one means task runs once (won't repeat).
+ * You should always set task's counter to 1.
+ */
+
+/*    task function             state      period        counter (must be 1)  */
+    { test_spi_align,           RUNNABLE,  MSEC(1),      1 },
+    { test_spi_string,          RUNNABLE,  MSEC(1000),   1 },
+    { test_spi_number,          RUNNABLE,  MSEC(500),    1 },
+    { spi_send_number,          PAUSED,    MSEC(1),      1 },
+    { spi_send_string,          PAUSED,    MSEC(1),      1 },
+    { spi_mode,                 PAUSED,    MSEC(1),      1 },
+    { spi_finish_transmission,  PAUSED,    MSEC(1),      1 },
+};
