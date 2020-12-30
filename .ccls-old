@@ -2,15 +2,13 @@ clang
 -target
 avr
 -mmcu=atmega8a
--nostdinc
--isystem/usr/avr/include
 %c -std=c99 -pedantic -Wall -Wextra
 %h -x
 %h c-header
+-I/usr/avr/include
 -Isrc
 -Isrc/tasks
 -Isrc/config
 -D__AVR_ATmega8A__
 -DTASKER_C
 -DMAIN_C
--Wno-attributes
