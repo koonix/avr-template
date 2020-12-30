@@ -1,5 +1,0 @@
-first compile the sketch:
-    arduino-cli compile -b arduino:avr:nano:cpu=atmega328old spi.ino
-
-then flash it:
-    arduino-cli upload -tp /dev/ttyUSB0 -b arduino:avr:nano:cpu=atmega328old spi.ino
