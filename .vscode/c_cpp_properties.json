@@ -4,7 +4,7 @@
     [
         {
             "name": "Linux",
-            "compilerPath": "/usr/bin/gcc",
+            "compilerPath": "/usr/bin/avr-gcc",
             "cppStandard": "c++11",
             "cStandard": "c99",
             "intelliSenseMode": "gcc-x86",
