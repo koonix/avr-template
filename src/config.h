@@ -35,6 +35,9 @@
 #define BUTTON   D,3
 #define LED_DOWN D,2
 #define LED_UP   D,4
+#define MOSI    B,3
+#define SCK     B,5
+#define SS      B,2
 
 #ifdef MAIN_C
 static void io_init(void)
@@ -52,14 +55,23 @@ static void io_init(void)
 
 
 // =====================
+// = Other Macros
+// =====================
+#define SPI_START  OFF(SS)
+#define SPI_END    ON(SS)
+
+#define ADC_START_CONVERSION           SETBIT(ADCSRA,ADSC)
+#define IS_ADC_CONVERSION_IN_PROGRESS  GETBIT(ADCSRA, ADSC)
+
+
+// =====================
 // = Other Config
 // =====================
-#define F_CPU 8000000UL /* avr clock speed (in HZ) */
-#define TASK_TIME_INTERVAL_MSEC 4 /* how often the task_time_manager runs (in milliseconds) */
+/* how often the tsk_task_time_manager runs (in milliseconds) */
+#define TASK_TIME_INTERVAL_MSEC 4
 
 
 #ifdef TASKER_C
-
 // =====================
 // = Tasks
 // =====================
@@ -90,7 +102,6 @@ Task task_array[] = {
 
 #endif
 #ifdef MAIN_C
-
 // =====================
 // = Registers
 // =====================
@@ -177,12 +188,28 @@ adc_init (void)
     (0 << ADPS0);
 }
 
+static void spi_init(void)
+{
+    SPCR=
+    (0 << SPIE) |
+    (1 << SPE)  |
+    (0 << DORD) |
+    (1 << MSTR) |
+    (0 << CPOL) |
+    (0 << CPHA) |
+    (0 << SPR1) |
+    (0 << SPR0);
+
+    SPSR = (0 << SPI2X);
+}
+
 static void registers_init(void)
 {
     io_init();
     timer0_init();
     timer1_init();
     adc_init();
+    spi_init();
     timer_interrupts_init();
 }
 
