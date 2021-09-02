@@ -1,4 +1,4 @@
-# avr-be-good
+# avr-template
 
 ## Intro
 
